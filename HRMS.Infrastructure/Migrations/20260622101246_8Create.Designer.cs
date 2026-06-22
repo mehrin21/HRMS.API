@@ -4,6 +4,7 @@ using HRMS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Infrastructure.Migrations
 {
     [DbContext(typeof(HrmsDbContext))]
-    partial class HrmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260622101246_8Create")]
+    partial class _8Create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +78,7 @@ namespace HRMS.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("DepartmentIdDeptId")
                         .HasColumnType("int");
 
                     b.Property<string>("DesignationCode")
@@ -100,57 +103,9 @@ namespace HRMS.Infrastructure.Migrations
 
                     b.HasKey("DesignationId");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentIdDeptId");
 
                     b.ToTable("Designations");
-                });
-
-            modelBuilder.Entity("HRMS.Domain.Entity.Employee", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("DOB")
-                        .HasColumnType("date");
-
-                    b.Property<int>("DesignationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Employeename")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EmployeeId");
-
-                    b.HasIndex("DesignationId");
-
-                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("HRMS.Domain.Entity.User", b =>
@@ -190,7 +145,7 @@ namespace HRMS.Infrastructure.Migrations
                             UserId = 1,
                             Email = "admin@hrms.com",
                             IsActive = true,
-                            PasswordHash = "$2a$11$cqLkVpTMdKtzBJwqpI97Zech45YYP7uSiK62mJ4wALqp5ylKizj1.",
+                            PasswordHash = "$2a$11$v3GFcAKdzspo3c/nUzCtrez7NG09Yi0G3nJ0LbnyZgWwB5HSML75m",
                             Role = "Admin",
                             UserName = "admin"
                         });
@@ -198,34 +153,13 @@ namespace HRMS.Infrastructure.Migrations
 
             modelBuilder.Entity("HRMS.Domain.Entities.Designation", b =>
                 {
-                    b.HasOne("HRMS.Domain.Entities.Department", "Department")
-                        .WithMany("Designations")
-                        .HasForeignKey("DepartmentId")
+                    b.HasOne("HRMS.Domain.Entities.Department", "DepartmentId")
+                        .WithMany()
+                        .HasForeignKey("DepartmentIdDeptId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("HRMS.Domain.Entity.Employee", b =>
-                {
-                    b.HasOne("HRMS.Domain.Entities.Designation", "Designation")
-                        .WithMany("Employees")
-                        .HasForeignKey("DesignationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Designation");
-                });
-
-            modelBuilder.Entity("HRMS.Domain.Entities.Department", b =>
-                {
-                    b.Navigation("Designations");
-                });
-
-            modelBuilder.Entity("HRMS.Domain.Entities.Designation", b =>
-                {
-                    b.Navigation("Employees");
+                    b.Navigation("DepartmentId");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,11 +12,14 @@ namespace HRMS.Infrastructure.Data
         {
         }
 
+        public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Department> Departments => Set<Department>();
 
         public DbSet<Designation> Designations => Set<Designation>();
 
         public DbSet<User> Users => Set<User>();
+
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

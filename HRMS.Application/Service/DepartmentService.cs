@@ -44,5 +44,11 @@ namespace HRMS.Application.Service
                 }).ToList()
             };
         }
+
+        //creating department
+        public async Task<ApiResponse<DepartmentDto>> CreateDept(DepartmentDto dept)
+        {
+
+        }
     }
 }

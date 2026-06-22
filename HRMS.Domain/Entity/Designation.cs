@@ -1,4 +1,5 @@
 ﻿using HRMS.Domain.Common;
+using HRMS.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,9 @@ namespace HRMS.Domain.Entities
         public string DesignationName { get; set; } = string.Empty;
 
         public bool IsActive { get; set; }
+        public int DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
 
-        public Department DepartmentId { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

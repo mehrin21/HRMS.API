@@ -18,5 +18,7 @@ namespace HRMS.Domain.Entities
         public string DepartmentName { get; set; } = string.Empty;
 
         public bool IsActive { get; set; }
+
+        public virtual ICollection<Designation> Designations { get; set; }
     }
 }

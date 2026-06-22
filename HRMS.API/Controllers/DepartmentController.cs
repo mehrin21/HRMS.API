@@ -1,4 +1,5 @@
-﻿using HRMS.Application.Interface;
+﻿using HRMS.Application.DTOs;
+using HRMS.Application.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.API.Controller
@@ -12,11 +13,19 @@ namespace HRMS.API.Controller
             _departmentService = departmentService;
         }
 
+        //getall and get by id
         [HttpPost("getdepartment")]
         public async Task<IActionResult> GetADepartment(int? id = 0)
         {
             var result = await _departmentService.GetDeaprtment(id);
             return Ok(result);
+        }
+
+        //createing a department 
+        [HttpPost("createdepaartment")]
+        public async Task<IActionResult> CreateDeprt(DepartmentDto dept)
+        {
+            return Ok();
         }
      }
 }

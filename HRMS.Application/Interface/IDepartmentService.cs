@@ -10,5 +10,7 @@ namespace HRMS.Application.Interface
     public interface IDepartmentService
     {
         Task<ApiResponse<List<DepartmentDto>>> GetDeaprtment(int? id);
+
+        Task<ApiResponse<DepartmentDto>> CreateDept(DepartmentDto dept);
     }
 }
