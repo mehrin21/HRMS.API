@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HRMS.Application.Interface;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.API.Controller
 {
@@ -6,12 +7,16 @@ namespace HRMS.API.Controller
     [Route("api/[controller]")]
     public class DepartmentController : ControllerBase
     {
-        public DepartmentController() { }
+        private readonly IDepartmentService _departmentService;
+        public DepartmentController(IDepartmentService departmentService) {
+            _departmentService = departmentService;
+        }
 
-        public async Task<IActionResult> GetADepartment()
+        [HttpPost("getdepartment")]
+        public async Task<IActionResult> GetADepartment(int? id = 0)
         {
-
-            return Ok();
+            var result = await _departmentService.GetDeaprtment(id);
+            return Ok(result);
         }
      }
 }
