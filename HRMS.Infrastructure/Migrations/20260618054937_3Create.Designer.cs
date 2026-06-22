@@ -4,6 +4,7 @@ using HRMS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Infrastructure.Migrations
 {
     [DbContext(typeof(HrmsDbContext))]
-    partial class HrmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260618054937_3Create")]
+    partial class _3Create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +78,6 @@ namespace HRMS.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentIdDeptId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DesignationCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -99,8 +99,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DesignationId");
-
-                    b.HasIndex("DepartmentIdDeptId");
 
                     b.ToTable("Designations");
                 });
@@ -142,21 +140,10 @@ namespace HRMS.Infrastructure.Migrations
                             UserId = 1,
                             Email = "admin@hrms.com",
                             IsActive = true,
-                            PasswordHash = "$2a$11$O2n4p2SvlZWgysQ7oJmp.e5ym9pb1j50Fwg90CZCHsB5h3IJui7se",
+                            PasswordHash = "$2a$11$OgolUyLXXymhU1CTQvUMnOrDuedaJ5lS0sSaxYLaxC3D7i6TI.wN2",
                             Role = "Admin",
                             UserName = "admin"
                         });
-                });
-
-            modelBuilder.Entity("HRMS.Domain.Entities.Designation", b =>
-                {
-                    b.HasOne("HRMS.Domain.Entities.Department", "DepartmentId")
-                        .WithMany()
-                        .HasForeignKey("DepartmentIdDeptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DepartmentId");
                 });
 #pragma warning restore 612, 618
         }
